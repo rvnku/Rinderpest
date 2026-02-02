@@ -5,6 +5,7 @@ from requests import get as request
 from urllib.request import quote
 from random import randrange
 from bs4 import BeautifulSoup
+from textwrap import wrap
 
 
 CHARACTERS = {
@@ -43,7 +44,11 @@ class DotartCogs(Cog, name='Manager for emojis'):
         await ctx.defer()
         if arts := get_arts(query):
             number = randrange(len(arts))
-            await ctx.reply(f'{arts[number]}\nArt: {number+1} / {len(arts)}')
+            content = wrap(f'{arts[number]}\nArt: {number+1} / {len(arts)}',
+                           width=2000,
+                           replace_whitespace=False,
+                           break_on_hyphens=False)
+            await ctx.reply(content)
         else:
             await ctx.reply('No art found v_v')
 
