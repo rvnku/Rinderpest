@@ -44,11 +44,13 @@ class DotartCogs(Cog, name='Manager for emojis'):
         await ctx.defer()
         if arts := get_arts(query):
             number = randrange(len(arts))
-            content = wrap(f'{arts[number]}\nArt: {number+1} / {len(arts)}',
+            contents = wrap(arts[number],
                            width=2000,
                            replace_whitespace=False,
                            break_on_hyphens=False)
-            await ctx.reply(content)
+            await ctx.reply(f'Art: {number+1} / {len(arts)}')
+            for content in contents:
+                await ctx.channel.send(content)
         else:
             await ctx.reply('No art found v_v')
 
