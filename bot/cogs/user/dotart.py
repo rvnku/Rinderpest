@@ -32,7 +32,7 @@ def get_arts(query: str) -> list[str]:
     return list(t for d in divs if is_picture(t := d.contents[0].text))
 
 
-class DotartCogs(Cog, name='Manager for emojis'):
+class DotartCogs(Cog, name='Dotart'):
 
     def __init__(self, bot: Bot):
         self.bot = bot
